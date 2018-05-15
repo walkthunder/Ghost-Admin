@@ -1,1 +1,27 @@
-{{outlet}}
+<h2>List of Sites</h2>
+<div>
+  <h3>New Site</h3>
+  <div>
+    <ul>
+      <li>
+        <span>URL: </span>
+      </li>
+      <li>
+        <span>QUERY: </span>
+      </li>
+      <li>
+        <span>INTERVAL: </span>
+      </li>
+      <li>
+        <span>STATUS: </span>
+      </li>
+    </ul>
+  </div>
+</div>
+<ul>
+  {{#each model as |site|}}
+    <li>{{site}}</li>
+  {{/each}}
+</ul>
+
+{{infinity-loader infinityModel=model}}
