@@ -1,27 +1,28 @@
-<h2>List of Sites</h2>
-<div>
-  <h3>New Site</h3>
-  <div>
-    <ul>
-      <li>
-        <span>URL: </span>
-      </li>
-      <li>
-        <span>QUERY: </span>
-      </li>
-      <li>
-        <span>INTERVAL: </span>
-      </li>
-      <li>
-        <span>STATUS: </span>
-      </li>
-    </ul>
-  </div>
-</div>
-<ul>
-  {{#each model as |site|}}
-    <li>{{site}}</li>
-  {{/each}}
-</ul>
+<div class="gh-flow">
+    <div class="gh-flow-content-wrap">
+        <section class="gh-flow-content sites-info-wrapper">
+          <div><h2>List of Sites</h2></div>
 
-{{infinity-loader infinityModel=model}}
+          <div class="site-info-row site-header">
+            <div class="site-info-row-item">ID</div>
+            <div class="site-info-row-item">URL</div>
+            <div class="site-info-row-item">QUERY</div>
+            <div class="site-info-row-item">INTERVAL</div>
+            <div class="site-info-row-item">STATUS</div>
+          </div>
+
+          {{#each model as |site|}}
+            <div class="site-info-row">
+              <div class="site-info-row-item">{{site.id}}</div>
+              <div class="site-info-row-item">{{site.resUrl}}</div>
+              <div class="site-info-row-item">{{site.queryRule}}</div>
+              <div class="site-info-row-item">{{site.interval}}</div>
+              <div class="site-info-row-item">{{site.status}}</div>
+            </div>
+          {{/each}}
+
+          {{infinity-loader infinityModel=model}}
+
+        </section>
+    </div>
+</div>

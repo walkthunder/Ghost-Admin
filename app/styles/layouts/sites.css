@@ -1,0 +1,35 @@
+/* Sites layout
+/* ---------------------------------------------------------- */
+
+.sites-info-wrapper {
+  max-width: 100%;
+  width: 100%;
+  padding: 20px;
+  margin: 0;
+}
+
+.site-info-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.site-info-row:nth-of-type(2n) {
+  background-color: lightgrey;
+}
+
+.site-header {
+  font-weight: bold;
+}
+.site-info-row-item {
+  flex: 1 1 100rem;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  word-wrap: break-word;
+  padding: 5px 10px;
+}
+
+.site-info-row-item:nth-of-type(2n) {
+  background-color: azure;
+  opacity: 0.8;
+}
