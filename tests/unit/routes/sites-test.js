@@ -1,0 +1,15 @@
+import {describe, it} from 'mocha';
+import {expect} from 'chai';
+import {setupTest} from 'ember-mocha';
+
+describe('Unit | Route | sites', function () {
+    setupTest('route:sites', {
+        // Specify the other units that are required for this test.
+        // needs: ['controller:foo']
+    });
+
+    it('exists', function () {
+        let route = this.subject();
+        expect(route).to.be.ok;
+    });
+});

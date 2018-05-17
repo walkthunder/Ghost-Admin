@@ -65,6 +65,7 @@ Router.map(function () {
     });
 
     this.route('error404', {path: '/*path'});
+    this.route('sites');
 });
 
 export default Router;
