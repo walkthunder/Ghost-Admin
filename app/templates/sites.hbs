@@ -9,6 +9,7 @@
             <div class="site-info-row-item">QUERY</div>
             <div class="site-info-row-item">INTERVAL</div>
             <div class="site-info-row-item">STATUS</div>
+            <div class="site-info-row-item">ACTION</div>
           </div>
 
           {{#each model as |site|}}
@@ -16,8 +17,11 @@
               <div class="site-info-row-item">{{site.id}}</div>
               <div class="site-info-row-item">{{site.resUrl}}</div>
               <div class="site-info-row-item">{{site.queryRule}}</div>
-              <div class="site-info-row-item">{{site.interval}}</div>
+              <div class="site-info-row-item">{{input value=site.interval}}</div>
               <div class="site-info-row-item">{{site.status}}</div>
+              <div class="site-info-row-item">
+                <button {{action "updateSite" site}}>Update</button>
+              </div>
             </div>
           {{/each}}
 
