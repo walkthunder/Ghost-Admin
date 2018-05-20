@@ -18,7 +18,7 @@ export default Model.extend(ValidationEngine, {
     ghostPaths: service(),
     clock: service(),
     settings: service(),
-
+    isNew: false,
     validationType: 'crawlSite',
 
     createdAtUTC: attr('moment-utc'),

@@ -1,7 +1,7 @@
 /* eslint-disable ghost/ember/alias-model-in-controller */
 import $ from 'jquery';
 import Controller from '@ember/controller';
-import NavigationItem from 'ghost-admin/models/navigation-item';
+import CrawlSiteItem from 'ghost-admin/models/crawl-site';
 import RSVP from 'rsvp';
 import {computed} from '@ember/object';
 import {isEmpty} from '@ember/utils';
@@ -17,13 +17,16 @@ export default Controller.extend({
     session: service(),
     settings: service(),
 
-    newNavItem: null,
+    newSiteItem: null,
 
     dirtyAttributes: false,
     
     init() {
         this._super(...arguments);
-        this.set('newNavItem', NavigationItem.create({isNew: true}));
+        this.set('newSiteItem', this.store.createRecord('crawl-site', {
+            resUrl: 'https://google.com',
+            queryRule: 'div'
+        }));
     },
     sites: alias('model'),
 
@@ -32,52 +35,32 @@ export default Controller.extend({
             this.get('sites').save();
         },
 
-        addNavItem() {
-            let newNavItem = this.get('newNavItem');
-
-            // If the url sent through is blank (user never edited the url)
-            if (newNavItem.get('url') === '') {
-                newNavItem.set('url', '/');
-            }
-
-            return newNavItem.validate().then(() => {
-                this.addNewNavItem();
-            });
-        },
-
-        deleteNavItem(item) {
-            if (!item) {
-                return;
-            }
-
-            let navItems = this.get('settings.navigation');
-
-            navItems.removeObject(item);
-            this.set('dirtyAttributes', true);
+        addSiteItem() {
+            let newSiteItem = this.get('newSiteItem');
+            console.debug('[add site item] - ', this.sites, newSiteItem);
+            newSiteItem.save();
         },
 
         updateSite(siteItem) {
             if (!siteItem) {
                 return;
             }
-            console.log('---site item-----', siteItem);
             siteItem.save();
             this.set('dirtyAttributes', true);
         },
 
         reset() {
-            this.set('newNavItem', NavigationItem.create({isNew: true}));
+            this.set('newSiteItem', CrawlSiteItem.create({isNew: true}));
         }
     },
 
-    addNewNavItem() {
-        let navItems = this.get('settings.navigation');
-        let newNavItem = this.get('newNavItem');
+    addNewSiteItem() {
+        let newSiteItem = this.get('newSiteItem');
 
-        newNavItem.set('isNew', false);
-        navItems.pushObject(newNavItem);
+        newSiteItem.set('isNew', false);
+        console.debug('[add new site item - ]', newSiteItem);
+        this.sites.pushObject(newSiteItem);
+        this.sites.save();
         this.set('dirtyAttributes', true);
-        this.set('newNavItem', NavigationItem.create({isNew: true}));
-        $('.gh-blognav-line:last input:first').focus();
     }
 });

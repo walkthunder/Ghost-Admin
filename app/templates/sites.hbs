@@ -25,6 +25,17 @@
             </div>
           {{/each}}
 
+          <div class="site-info-row">
+              <div class="site-info-row-item">{{newSiteItem.id}}</div>
+              <div class="site-info-row-item">{{newSiteItem.resUrl}}</div>
+              <div class="site-info-row-item">{{newSiteItem.queryRule}}</div>
+              <div class="site-info-row-item">{{input value=newSiteItem.interval}}</div>
+              <div class="site-info-row-item">{{newSiteItem.status}}</div>
+              <div class="site-info-row-item">
+                <button {{action "addSiteItem" site}}>Add New</button>
+              </div>
+            </div>
+
           {{infinity-loader infinityModel=model}}
 
         </section>
