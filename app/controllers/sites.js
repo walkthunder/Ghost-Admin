@@ -21,25 +21,15 @@ export default Controller.extend({
 
     dirtyAttributes: false,
     
-    themes: null,
-    themeToDelete: null,
-    
     init() {
         this._super(...arguments);
         this.set('newNavItem', NavigationItem.create({isNew: true}));
     },
     sites: alias('model'),
-    showDeleteThemeModal: notEmpty('themeToDelete'),
-
-    blogUrl: computed('config.blogUrl', function () {
-        let url = this.get('config.blogUrl');
-
-        return url.slice(-1) !== '/' ? `${url}/` : url;
-    }),
 
     actions: {
         save() {
-            this.get('save').perform();
+            this.get('sites').save();
         },
 
         addNavItem() {
@@ -70,24 +60,8 @@ export default Controller.extend({
             if (!siteItem) {
                 return;
             }
-            console.log('---site item-----', siteItem);          
-        },
-
-        updateLabel(label, navItem) {
-            if (!navItem) {
-                return;
-            }
-
-            navItem.set('label', label);
-            this.set('dirtyAttributes', true);
-        },
-
-        updateUrl(url, navItem) {
-            if (!navItem) {
-                return;
-            }
-
-            navItem.set('url', url);
+            console.log('---site item-----', siteItem);
+            siteItem.save();
             this.set('dirtyAttributes', true);
         },
 
@@ -95,32 +69,6 @@ export default Controller.extend({
             this.set('newNavItem', NavigationItem.create({isNew: true}));
         }
     },
-
-    save: task(function* () {
-        let navItems = this.get('settings.navigation');
-        let newNavItem = this.get('newNavItem');
-        let notifications = this.get('notifications');
-        let validationPromises = [];
-
-        if (!newNavItem.get('isBlank')) {
-            validationPromises.pushObject(this.send('addNavItem'));
-        }
-
-        navItems.map((item) => {
-            validationPromises.pushObject(item.validate());
-        });
-
-        try {
-            yield RSVP.all(validationPromises);
-            this.set('dirtyAttributes', false);
-            return yield this.get('settings').save();
-        } catch (error) {
-            if (error) {
-                notifications.showAPIError(error);
-                throw error;
-            }
-        }
-    }),
 
     addNewNavItem() {
         let navItems = this.get('settings.navigation');

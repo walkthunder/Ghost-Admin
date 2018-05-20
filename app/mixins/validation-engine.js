@@ -1,3 +1,4 @@
+import CrawlSiteValidator from 'ghost-admin/validators/crawl-site';
 import DS from 'ember-data';
 import InviteUserValidator from 'ghost-admin/validators/invite-user';
 import Mixin from '@ember/object/mixin';
@@ -42,7 +43,8 @@ export default Mixin.create({
         slackIntegration: SlackIntegrationValidator,
         subscriber: SubscriberValidator,
         tag: TagSettingsValidator,
-        user: UserValidator
+        user: UserValidator,
+        crawlSite: CrawlSiteValidator
     },
 
     // This adds the Errors object to the validation engine, and shouldn't affect

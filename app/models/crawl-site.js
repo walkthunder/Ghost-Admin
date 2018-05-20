@@ -19,7 +19,7 @@ export default Model.extend(ValidationEngine, {
     clock: service(),
     settings: service(),
 
-    validationType: 'crawl-site',
+    validationType: 'crawlSite',
 
     createdAtUTC: attr('moment-utc'),
     updatedAtUTC: attr('moment-utc'),
