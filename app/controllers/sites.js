@@ -1,7 +1,7 @@
 /* eslint-disable ghost/ember/alias-model-in-controller */
 import $ from 'jquery';
 import Controller from '@ember/controller';
-import CrawlSiteItem from 'ghost-admin/models/crawl-site';
+import CrawlsiteItem from 'ghost-admin/models/crawlsite';
 import RSVP from 'rsvp';
 import {computed} from '@ember/object';
 import {isEmpty} from '@ember/utils';
@@ -23,9 +23,8 @@ export default Controller.extend({
     
     init() {
         this._super(...arguments);
-        this.set('newSiteItem', this.store.createRecord('crawl-site', {
-            resUrl: 'https://google.com',
-            queryRule: 'div'
+        this.set('newSiteItem', this.store.createRecord('crawlsite', {
+            isNew: true
         }));
     },
     sites: alias('model'),
@@ -39,6 +38,7 @@ export default Controller.extend({
             let newSiteItem = this.get('newSiteItem');
             console.debug('[add site item] - ', this.sites, newSiteItem);
             newSiteItem.save();
+            this.addNewSiteItem();
         },
 
         updateSite(siteItem) {
@@ -50,7 +50,7 @@ export default Controller.extend({
         },
 
         reset() {
-            this.set('newSiteItem', CrawlSiteItem.create({isNew: true}));
+            this.set('newSiteItem', CrawlsiteItem.create({isNew: true}));
         }
     },
 
@@ -60,7 +60,9 @@ export default Controller.extend({
         newSiteItem.set('isNew', false);
         console.debug('[add new site item - ]', newSiteItem);
         this.sites.pushObject(newSiteItem);
-        this.sites.save();
-        this.set('dirtyAttributes', true);
+        // this.sites.save();
+        this.set('newSiteItem', this.store.createRecord('crawlsite', {
+            isNew: true
+        }));
     }
 });

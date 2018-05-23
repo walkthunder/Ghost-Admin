@@ -42,7 +42,7 @@ export default AuthenticatedRoute.extend(InfinityRoute, {
             let perPage = this.get('perPage');
             let paginationSettings = assign({perPage, startingPage: 1}, paginationParams, queryParams);
 
-            return this.infinityModel('crawl-site', paginationSettings);
+            return this.infinityModel('crawlsite', paginationSettings);
         });
     },
 
