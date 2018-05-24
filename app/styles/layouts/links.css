@@ -1,0 +1,37 @@
+/* links layout
+/* ---------------------------------------------------------- */
+
+.links-info-wrapper {
+  max-width: 100%;
+  width: 100%;
+  padding: 20px;
+  margin: 0;
+  box-shadow: 0 0 1px 2px aliceblue;
+}
+
+.link-info-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.link-info-row:nth-of-type(2n) {
+  background-color: lightgrey;
+}
+
+.link-header {
+  font-weight: bold;
+}
+.link-info-row-item {
+  flex: 1 1 100rem;
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  word-wrap: break-word;
+  padding: 5px 10px;
+}
+
+.link-info-row-item:nth-of-type(2n) {
+  background: rgba(76,175,80,0.33);
+  color: #4caf50;
+  opacity: 0.9;
+}

@@ -1,3 +1,4 @@
+import CrawlLinkValidator from 'ghost-admin/validators/crawllink';
 import CrawlSiteValidator from 'ghost-admin/validators/crawlsite';
 import DS from 'ember-data';
 import InviteUserValidator from 'ghost-admin/validators/invite-user';
@@ -44,7 +45,8 @@ export default Mixin.create({
         subscriber: SubscriberValidator,
         tag: TagSettingsValidator,
         user: UserValidator,
-        crawlsite: CrawlSiteValidator
+        crawlsite: CrawlSiteValidator,
+        crawllink: CrawlLinkValidator
     },
 
     // This adds the Errors object to the validation engine, and shouldn't affect

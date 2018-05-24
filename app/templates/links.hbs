@@ -1,0 +1,43 @@
+<div class="gh-flow">
+    <div class="gh-flow-content-wrap">
+        <section class="gh-flow-content links-info-wrapper">
+          <div><h2>List of links</h2></div>
+
+          <div class="link-info-row link-header">
+            <div class="link-info-row-item">ID</div>
+            <div class="link-info-row-item">FROM</div>
+            <div class="link-info-row-item">TO</div>
+            <div class="link-info-row-item">RULES</div>
+            <div class="link-info-row-item">STATUS</div>
+            <div class="link-info-row-item">ACTION</div>
+          </div>
+
+          {{#each model as |link|}}
+            <div class="link-info-row">
+              <div class="link-info-row-item">{{link.id}}</div>
+              <div class="link-info-row-item">{{link.crawlsiteId}}</div>
+              <div class="link-info-row-item">{{link.postId}}</div>
+              <div class="link-info-row-item">{{input value=link.queryRule}}</div>
+              <div class="link-info-row-item">{{input value=link.status}}</div>
+              <div class="link-info-row-item">
+                <button {{action "updateLink" link}}>Update</button>
+              </div>
+            </div>
+          {{/each}}
+
+          <div class="link-info-row">
+              <div class="link-info-row-item">{{newLinkItem.id}}</div>
+              <div class="link-info-row-item">{{input value=newLinkItem.crawlsiteId}}</div>
+              <div class="link-info-row-item">{{input value=newLinkItem.postId}}</div>
+              <div class="link-info-row-item">{{input value=newLinkItem.queryRule}}</div>
+              <div class="link-info-row-item">{{input value=newLinkItem.status}}</div>
+              <div class="link-info-row-item">
+                <button {{action "addLinkItem" link}}>Add New</button>
+              </div>
+            </div>
+
+          {{infinity-loader infinityModel=model}}
+
+        </section>
+    </div>
+</div>
