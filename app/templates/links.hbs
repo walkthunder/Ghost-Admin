@@ -30,7 +30,7 @@
                 classNames="gh-contentfilter-menu gh-contentfilter-author"
                 triggerClass="gh-contentfilter-menu-trigger"
                 dropdownClass="gh-contentfilter-menu-dropdown"
-                searchPlaceholder="Search site"
+                searchPlaceholder="Search Site"
                 matchTriggerWidth=true
                 data-test-crawlsite-select=true
                 as |crawlsite|
@@ -38,10 +38,24 @@
                   {{crawlsite.name}}
               {{/power-select}}
             </div>
-            <div class="link-info-query-item">FROM {{input value=query.crawlsiteId}}</div>
-            <div class="link-info-query-item">TO {{input value=query.postId}}</div>
-            <div class="link-info-query-item">STATUS {{input value=query.status}}</div>
-            <button class="ibtn link-info-query-item" {{action "query" query}}>QUERY</button>
+            <div class="link-info-query-item">
+              {{#power-select
+                selected=selectedPost
+                options=availablePosts
+                searchField="id"
+                onchange=(action "changePost")
+                tagName="div"
+                classNames="gh-contentfilter-menu gh-contentfilter-author"
+                triggerClass="gh-contentfilter-menu-trigger"
+                dropdownClass="gh-contentfilter-menu-dropdown"
+                searchPlaceholder="Search Post"
+                matchTriggerWidth=true
+                data-test-post-select=true
+                as |post|
+              }}
+                  {{post.slug}}
+              {{/power-select}}
+            </div>
           </div>
           <div class="links-info-body">
             <div class="link-info-row link-header">

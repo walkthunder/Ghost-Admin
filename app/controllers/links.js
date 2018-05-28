@@ -73,7 +73,25 @@ export default Controller.extend({
 
     selectedSite: computed('crawlsite', 'availableSites.[]', function () {
         let sites = this.get('availableSites');
+
         return sites.findBy('id', this.get('crawlsiteId'));
+    }),
+
+    _availablePosts: computed(function () {
+        return this.get('store').peekAll('post');
+    }),
+
+    availablePosts: computed('_availablePosts.[]', function () {
+        let posts = this.get('_availablePosts');
+        let options = posts.toArray();
+        options.unshiftObject({slug: 'All posts', id: null});
+
+        return options;
+    }),
+
+    selectedPost: computed('post', 'availablePosts.[]', function () {
+        let posts = this.get('availablePosts');
+        return posts.findBy('id', this.get('postId'));
     }),
 
     actions: {
@@ -81,13 +99,14 @@ export default Controller.extend({
             this.get('links').save();
         },
         changeStatus(status) {
-            console.log('changeStatus...');
             // this.set('queryParams', {});
             this.set('status', get(status, 'value'));
         },
         changeSite(site) {
-            console.log('change site id', get(site, 'id'));
             this.set('crawlsiteId', get(site, 'id'));
+        },
+        changePost(post) {
+            this.set('postId', get(post, 'id'));
         },
 
         addLinkItem() {
