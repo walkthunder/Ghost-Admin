@@ -20,6 +20,24 @@
                 {{status.name}}
               {{/power-select}}
             </div>
+            <div class="link-info-query-item">
+              {{#power-select
+                selected=selectedSite
+                options=availableSites
+                searchField="id"
+                onchange=(action "changeSite")
+                tagName="div"
+                classNames="gh-contentfilter-menu gh-contentfilter-author"
+                triggerClass="gh-contentfilter-menu-trigger"
+                dropdownClass="gh-contentfilter-menu-dropdown"
+                searchPlaceholder="Search site"
+                matchTriggerWidth=true
+                data-test-crawlsite-select=true
+                as |crawlsite|
+              }}
+                  {{crawlsite.name}}
+              {{/power-select}}
+            </div>
             <div class="link-info-query-item">FROM {{input value=query.crawlsiteId}}</div>
             <div class="link-info-query-item">TO {{input value=query.postId}}</div>
             <div class="link-info-query-item">STATUS {{input value=query.status}}</div>

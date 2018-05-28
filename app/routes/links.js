@@ -11,7 +11,7 @@ export default AuthenticatedRoute.extend(InfinityRoute, {
             refreshModel: true,
             replace: true
         },
-        crawlsite_id: {
+        crawlsiteId: {
             refreshModel: true,
             replace: true
         },
@@ -42,6 +42,10 @@ export default AuthenticatedRoute.extend(InfinityRoute, {
 
             if (params.status) {
                 queryParams.status = params.status;
+            }
+
+            if (params.crawlsiteId) {
+                queryParams.crawlsiteId = params.crawlsiteId;
             }
 
             if (!isBlank(params.order)) {

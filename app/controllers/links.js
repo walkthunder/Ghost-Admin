@@ -3,7 +3,7 @@ import $ from 'jquery';
 import Controller from '@ember/controller';
 import CrawllinkItem from 'ghost-admin/models/crawllink';
 import RSVP from 'rsvp';
-import {computed, get} from '@ember/object';
+import {computed, get, set} from '@ember/object';
 import {isEmpty} from '@ember/utils';
 import {isThemeValidationError} from 'ghost-admin/services/ajax';
 import {alias, notEmpty} from '@ember/object/computed';
@@ -55,6 +55,27 @@ export default Controller.extend({
         return statuses.findBy('value', this.get('status'));
     }),
 
+    _availableSites: computed(function () {
+        return this.get('store').peekAll('crawlsite');
+    }),
+
+    availableSites: computed('_availableSites.[]', function () {
+        let sites = this.get('_availableSites');
+        let options = sites.toArray().map(function (site) {
+            set(site, 'name', get(site, 'id'));
+            return site;
+        });
+
+        options.unshiftObject({name: 'All sites', id: null});
+
+        return options;
+    }),
+
+    selectedSite: computed('crawlsite', 'availableSites.[]', function () {
+        let sites = this.get('availableSites');
+        return sites.findBy('id', this.get('crawlsiteId'));
+    }),
+
     actions: {
         save() {
             this.get('links').save();
@@ -63,6 +84,10 @@ export default Controller.extend({
             console.log('changeStatus...');
             // this.set('queryParams', {});
             this.set('status', get(status, 'value'));
+        },
+        changeSite(site) {
+            console.log('change site id', get(site, 'id'));
+            this.set('crawlsiteId', get(site, 'id'));
         },
 
         addLinkItem() {
