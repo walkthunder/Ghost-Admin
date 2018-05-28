@@ -15,6 +15,10 @@ export default AuthenticatedRoute.extend(InfinityRoute, {
             refreshModel: true,
             replace: true
         },
+        post_id: {
+            refreshModel: true,
+            replace: true
+        },
         order: {
             refreshModel: true,
             replace: true
@@ -27,13 +31,18 @@ export default AuthenticatedRoute.extend(InfinityRoute, {
 
     _type: null,
 
-    model(params) {
+    model(params = {}) {
         return Promise.resolve().then(() => {
+            console.log('---user---', params);
             let queryParams = {};
             let paginationParams = {
                 perPageParam: 'limit',
                 totalPagesParam: 'meta.pagination.pages'
             };
+
+            if (params.status) {
+                queryParams.status = params.status;
+            }
 
             if (!isBlank(params.order)) {
                 queryParams.order = params.order;

@@ -3,12 +3,26 @@ import $ from 'jquery';
 import Controller from '@ember/controller';
 import CrawllinkItem from 'ghost-admin/models/crawllink';
 import RSVP from 'rsvp';
-import {computed} from '@ember/object';
+import {computed, get} from '@ember/object';
 import {isEmpty} from '@ember/utils';
 import {isThemeValidationError} from 'ghost-admin/services/ajax';
 import {alias, notEmpty} from '@ember/object/computed';
 import {inject as service} from '@ember/service';
 import {task} from 'ember-concurrency';
+
+const STATUS = [{
+    name: 'all status',
+    value: null
+}, {
+    name: 'pending link',
+    value: 'pending'
+}, {
+    name: 'done link',
+    value: 'done'
+}, {
+    name: 'failed link',
+    value: 'failed'
+}];
 
 export default Controller.extend({
     config: service(),
@@ -17,21 +31,38 @@ export default Controller.extend({
     session: service(),
     settings: service(),
 
+    queryParams: ['status', 'crawlsiteId', 'postId'],
     newLinkItem: null,
-
     dirtyAttributes: false,
+
+    status: null,
+    crawlsiteId: null,
+    postId: null,
+
+    availableStatuses: null,
     
     init() {
         this._super(...arguments);
+        this.availableStatuses = STATUS;
         this.set('newLinkItem', this.store.createRecord('crawllink', {
             isNew: true
         }));
     },
     links: alias('model'),
 
+    selectedStatus: computed('status', function () {
+        let statuses = this.get('availableStatuses');
+        return statuses.findBy('value', this.get('status'));
+    }),
+
     actions: {
         save() {
             this.get('links').save();
+        },
+        changeStatus(status) {
+            console.log('changeStatus...');
+            // this.set('queryParams', {});
+            this.set('status', get(status, 'value'));
         },
 
         addLinkItem() {
