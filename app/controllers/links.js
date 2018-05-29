@@ -71,7 +71,7 @@ export default Controller.extend({
         return options;
     }),
 
-    selectedSite: computed('crawlsite', 'availableSites.[]', function () {
+    selectedSite: computed('crawlsiteId', 'availableSites.[]', function () {
         let sites = this.get('availableSites');
 
         return sites.findBy('id', this.get('crawlsiteId'));
@@ -89,7 +89,7 @@ export default Controller.extend({
         return options;
     }),
 
-    selectedPost: computed('post', 'availablePosts.[]', function () {
+    selectedPost: computed('postId', 'availablePosts.[]', function () {
         let posts = this.get('availablePosts');
         return posts.findBy('id', this.get('postId'));
     }),
