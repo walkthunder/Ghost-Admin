@@ -60,6 +60,7 @@
           <div class="links-info-body">
             <div class="link-info-row link-header">
               <div class="link-info-row-item">ID</div>
+              <div class="link-info-row-item">URI</div>
               <div class="link-info-row-item">FROM</div>
               <div class="link-info-row-item">TO</div>
               <div class="link-info-row-item">RULES</div>
@@ -70,6 +71,7 @@
             {{#each model as |link|}}
               <div class="link-info-row">
                 <div class="link-info-row-item">{{link.id}}</div>
+                <div class="link-info-row-item">{{input value=link.uri}}</div>
                 <div class="link-info-row-item">{{input value=link.crawlsiteId}}</div>
                 <div class="link-info-row-item">{{input value=link.postId}}</div>
                 <div class="link-info-row-item">{{input value=link.queryRule}}</div>
@@ -82,6 +84,7 @@
 
             <div class="link-info-row">
               <div class="link-info-row-item">{{newLinkItem.id}}</div>
+              <div class="link-info-row-item">{{input value=link.uri}}</div>
               <div class="link-info-row-item">{{input value=newLinkItem.crawlsiteId}}</div>
               <div class="link-info-row-item">{{input value=newLinkItem.postId}}</div>
               <div class="link-info-row-item">{{input value=newLinkItem.queryRule}}</div>

@@ -23,6 +23,7 @@ export default Model.extend(ValidationEngine, {
 
     createdAtUTC: attr('moment-utc'),
     updatedAtUTC: attr('moment-utc'),
+    uri: attr('string'),
     crawlsiteId: attr('string'),
     postId: attr('string'),
     queryRule: attr('string'),

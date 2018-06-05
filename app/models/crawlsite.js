@@ -24,6 +24,7 @@ export default Model.extend(ValidationEngine, {
     createdAtUTC: attr('moment-utc'),
     updatedAtUTC: attr('moment-utc'),
     queryRule: attr('string'),
+    subQueryRule: attr('string'),
     page: attr('boolean', {defaultValue: false}),
     status: attr('string', {defaultValue: 'open'}),
     resUrl: attr('string'),

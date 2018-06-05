@@ -7,6 +7,7 @@ export default BaseValidator.create({
         'resUrl',
         'interval',
         'queryRule',
+        'subQueryRule',
         'status'
     ],
 
